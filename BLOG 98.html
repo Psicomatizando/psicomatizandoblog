@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Blog Estilo Windows 98</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #008080;
+            font-family: Arial, sans-serif;
+        }
+
+        #desktop {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .icon {
+            width: 80px;
+            text-align: center;
+            cursor: pointer;
+            position: absolute;
+        }
+
+        .icon img {
+            width: 48px;
+            height: 48px;
+        }
+
+        .window {
+            display: none;
+            width: 400px;
+            height: 300px;
+            position: absolute;
+            background-color: #fff;
+            border: 2px solid #000;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .window-header {
+            background-color: #000080;
+            color: #fff;
+            padding: 5px;
+            font-size: 14px;
+            cursor: move;
+        }
+
+        .window-content {
+            padding: 10px;
+            overflow: auto;
+            height: calc(100% - 30px);
+        }
+
+        #taskbar {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
+            background-color: #c0c0c0;
+            border-top: 2px solid #808080;
+            display: flex;
+            align-items: center;
+        }
+
+        #start-button {
+            background-color: #c0c0c0;
+            border: 2px solid #808080;
+            padding: 5px;
+            margin-left: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="desktop">
+        <div class="icon" id="category1" style="top: 100px; left: 100px;">
+            <img src="https://img.icons8.com/ultraviolet/40/null/folder-invoices.png" alt="Carpeta">
+            <div>Reflexiones</div>
+        </div>
+        <div class="icon" id="category2" style="top: 200px; left: 100px;">
+            <img src="https://img.icons8.com/ultraviolet/40/null/folder-invoices.png" alt="Carpeta">
+            <div>Filosofía</div>
+        </div>
+        
+        <div class="window" id="window-category1">
+            <div class="window-header">Reflexiones<div class="close-button" style="float: right; cursor: pointer;">X</div></div>
+            <div class="window-content">
+                <div class="icon" style="position: relative;">
+                    <img src="https://img.icons8.com/ios/40/000000/txt.png" alt="Post">
+                    <div>Post 1</div>
+                </div>
+                <div class="icon" style="position: relative;">
+                    <img src="https://img.icons8.com/ios/40/000000/txt.png" alt="Post">
+                    <div>Post 2</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="window" id="window-category2">
+            <div class="window-header">Filosofía<div class="close-button" style="float: right; cursor: pointer;">X</div></div>
+            <div class="window-content">
+                <div class="icon" style="position: relative;">
+                    <img src="https://img.icons8.com/ios/40/000000/txt.png" alt="Post">
+                    <div>Post A</div>
+                </div>
+                <div class="icon" style="position: relative;">
+                    <img src="https://img.icons8.com/ios/40/000000/txt.png" alt="Post">
+                    <div>Post B</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="taskbar">
+        <div id="start-button">Inicio</div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Permitir que los iconos sean arrastrables
+            $('.icon').draggable();
+
+            // Abrir ventanas al hacer doble click en las carpetas
+            $('#category1').dblclick(function () {
+                $('#window-category1').show().css({ top: '150px', left: '150px' }).draggable({ handle: '.window-header' });
+            });
+
+            $('#category2').dblclick(function () {
+                $('#window-category2').show().css({ top: '150px', left: '250px' }).draggable({ handle: '.window-header' });
+            });
+
+            // Permitir que las ventanas sean movibles
+            $('.window').draggable({ handle: '.window-header' });
+
+            // Cerrar ventana al hacer click en el botón de cerrar
+            $('.close-button').click(function () {
+                $(this).closest('.window').hide();
+            });
+        });
+    </script>
+</body>
+</html>
